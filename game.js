@@ -18,6 +18,14 @@ const state = {
   over: 2
 }
 
+// start button coordinates
+const startBtn = {
+  x: 120,
+  y: 263,
+  w: 83,
+  h: 29
+}
+
 // control the game
 cvs.addEventListener("click", function(event) {
   switch(state.current) {
@@ -28,7 +36,18 @@ cvs.addEventListener("click", function(event) {
       bird.flap();
       break;
     case state.over:
-      state.current = state.getReady;
+      let rect = cvs.getBoundingClientRect();
+      let clickX = event.clientX - rect.left;
+      let clickY = event.clientY - rect.top;
+
+      // check if we click on the start button
+      if (clickX >= startBtn.x && clickX <= startBtn.x + startBtn.w &&
+          clickY >= startBtn.y && clickY <= startBtn.y + startBtn.h) {
+            pipes.reset();
+            bird.speedReset();
+            score.reset();
+            state.current = state.getReady;
+      }
       break;
   }
 })
@@ -140,6 +159,10 @@ const bird = {
         this.rotation = -25 * DEGREE;
       }
     }
+  },
+
+  speedReset: function() {
+    this.speed = 0;
   }
 }
 
@@ -218,6 +241,7 @@ const pipes = {
         y: this.maxYPos * (Math.random() + 1)
       });
     }
+
     for (let i = 0; i < this.position.length; i++) {
       let p = this.position[i];
 
@@ -249,6 +273,10 @@ const pipes = {
         localStorage.setItem("best", score.best);
       }
     }
+  },
+
+  reset: function() {
+    this.position = [];
   }
 }
 
@@ -276,6 +304,10 @@ const score = {
         ctx.fillText(this.best, 255, 228);
         ctx.strokeText(this.best, 255, 228);
     }
+  },
+
+  reset: function() {
+    this.value = 0;
   }
 }
 
