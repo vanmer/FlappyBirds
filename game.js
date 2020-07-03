@@ -86,6 +86,8 @@ const bird = {
   w: 34,
   h: 26,
 
+  radius: 12,
+
   frame: 0,
 
   gravity: 0.25,
@@ -218,7 +220,24 @@ const pipes = {
     }
     for (let i = 0; i < this.position.length; i++) {
       let p = this.position[i];
+
+      let bottomYPos = p.y + this.h + this.gap;
+
+      // collision detection
+      // top pipe
+      if (bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w &&
+          bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h) {
+            state.current = state.over;
+      }
+      // bottom pipe
+      if (bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w &&
+          bird.y + bird.radius > bottomYPos && bird.y - bird.radius < bottomYPos + this.h) {
+            state.current = state.over;
+      }
+
+      // move the pipes to the left
       p.x -= this.dx;
+
       // if pipes go beyond canvas, we remove them from the array
       if (p.x + this.w <= 0) {
         this.position.shift();
