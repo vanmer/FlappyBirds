@@ -10,6 +10,22 @@ const DEGREE = Math.PI/180;
 const sprite = new Image();
 sprite.src = "img/sprite.png";
 
+// load sound files
+const SCORE_S = new Audio();
+SCORE_S.src = "audio/sfx_point.wav";
+
+const FLAP = new Audio();
+FLAP.src = "audio/sfx_flap.wav";
+
+const HIT = new Audio();
+HIT.src = "audio/sfx_hit.wav";
+
+const SWOOSHING = new Audio();
+SWOOSHING.src = "audio/sfx_swooshing.wav";
+
+const DIE = new Audio();
+DIE.src = "audio/sfx_die.wav";
+
 // game state
 const state = {
   current: 0,
@@ -31,9 +47,11 @@ cvs.addEventListener("click", function(event) {
   switch(state.current) {
     case state.getReady:
       state.current = state.game;
+      SWOOSHING.play();
       break;
     case state.game:
       bird.flap();
+      FLAP.play();
       break;
     case state.over:
       let rect = cvs.getBoundingClientRect();
@@ -148,6 +166,7 @@ const bird = {
         this.y = cvs.height - fg.h - this.h/2;
         if (state.current == state.game) {
           state.current = state.over;
+          DIE.play();
         }
       }
 
@@ -252,11 +271,13 @@ const pipes = {
       if (bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w &&
           bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h) {
             state.current = state.over;
+            HIT.play();
       }
       // bottom pipe
       if (bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w &&
           bird.y + bird.radius > bottomYPos && bird.y - bird.radius < bottomYPos + this.h) {
             state.current = state.over;
+            HIT.play();
       }
 
       // move the pipes to the left
@@ -265,10 +286,8 @@ const pipes = {
       // if pipes go beyond canvas, we remove them from the array
       if (p.x + this.w <= 0) {
         this.position.shift();
-
-        // update score
-        score.value += 1;
-
+        score.value += 1; // update score
+        SCORE_S.play();
         score.best = Math.max(score.value, score.best);
         localStorage.setItem("best", score.best);
       }
