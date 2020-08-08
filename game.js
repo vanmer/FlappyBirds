@@ -316,12 +316,12 @@ const score = {
     } else if (state.current == state.over) {
         // score value
         ctx.font = "25px Teko";
-        ctx.fillText(this.value, 255, 186);
-        ctx.strokeText(this.value, 255, 186);
+        ctx.fillText(this.value, 224, 186);
+        ctx.strokeText(this.value, 224, 186);
         // best value
         ctx.font = "25px Teko";
-        ctx.fillText(this.best, 255, 228);
-        ctx.strokeText(this.best, 255, 228);
+        ctx.fillText(this.best, 224, 228);
+        ctx.strokeText(this.best, 224, 228);
     }
   },
 
