@@ -70,7 +70,7 @@ cvs.addEventListener("click", function(event) {
   }
 })
 
-// background
+// BACKGROUND
 const bg = {
   sX: 0,
   sY: 0,
@@ -86,7 +86,7 @@ const bg = {
   }
 }
 
-// foreground
+// FOREGROUND
 const fg = {
   sX: 276,
   sY: 0,
@@ -110,7 +110,7 @@ const fg = {
   }
 }
 
-// bird
+// BIRD
 const bird = {
   animation: [
     { sX: 276, sY: 112 },
@@ -185,7 +185,7 @@ const bird = {
   }
 }
 
-// get ready message
+// GET READY MESSAGE
 const getReady = {
   sX: 0,
   sY: 228,
@@ -201,7 +201,7 @@ const getReady = {
   }
 }
 
-// game over message
+// GAME OVER MESSAGE
 const gameOver = {
   sX: 175,
   sY: 228,
@@ -217,7 +217,7 @@ const gameOver = {
   }
 }
 
-// pipes
+// PIPES
 const pipes = {
   position: [],
 
@@ -299,7 +299,7 @@ const pipes = {
   }
 }
 
-// score
+// SCORE
 const score = {
   best: parseInt(localStorage.getItem("best")) || 0,
   value: 0,
@@ -330,7 +330,7 @@ const score = {
   }
 }
 
-// draw function
+// DRAW FUNCTION
 function draw() {
   ctx.fillStyle = "#70C5CE";
   ctx.fillRect(0, 0, cvs.width, cvs.height);
