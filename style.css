@@ -17,6 +17,7 @@ canvas {
 @media (max-width: 500px) {
   body {
     background-color: #000;
+    width: 
   }
   canvas {
     border: none;
@@ -24,8 +25,8 @@ canvas {
     height: auto;
     margin: 0;
     position: absolute;
-    top: 50%;
+    /* top: 50%;
     -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    transform: translateY(-50%); */
   }
 }

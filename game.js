@@ -1,16 +1,16 @@
-// select canvas
+// SELECT CANVAS
 const cvs = document.getElementById("bird");
 const ctx = cvs.getContext("2d");
 
-// game variables
+// GAME VARIABLES
 let frames = 0;
 const DEGREE = Math.PI/180;
 
-// load sprite image
+// LOAD SPRITE IMAGE
 const sprite = new Image();
 sprite.src = "img/sprite.png";
 
-// load sound files
+// LOAD SOUND FILES
 const SCORE_S = new Audio();
 SCORE_S.src = "audio/sfx_point.wav";
 
@@ -26,7 +26,7 @@ SWOOSHING.src = "audio/sfx_swooshing.wav";
 const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
-// game state
+// GAME STATE
 const state = {
   current: 0,
   getReady: 0,
@@ -34,7 +34,7 @@ const state = {
   over: 2
 }
 
-// start button coordinates
+// START BUTTON COORDINATES
 const startBtn = {
   x: 120,
   y: 263,
@@ -42,7 +42,7 @@ const startBtn = {
   h: 29
 }
 
-// control the game
+// CONTROL THE GAME
 cvs.addEventListener("click", function(event) {
   switch(state.current) {
     case state.getReady:
